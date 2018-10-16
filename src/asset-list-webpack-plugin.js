@@ -1,43 +1,58 @@
 const { RawSource } = require('webpack-sources');
 
 function AssetListPlugin(options) {
-  this.options = options || { name: 'assets', mode: 'array' };
+  this.options = options || { name: 'assets', format: 'array' };
 }
 
 AssetListPlugin.prototype.apply = function(compiler) {
+  var logPrefix = 'asset-list-webpack-plugin: ';
   var outputName = this.options.name || 'assets';
-  var mode = this.options.mode || 'array';
-  var key = this.options.key || 'name';
+
+  var format = this.options.format || 'array';
+  if(format !== 'array' && format !== 'object') {
+    throw new Error(logPrefix+'Plugin only supports "array" or "object" formats.');
+  }
+
+  var key = this.options.key;
+  if(key && format === 'array') {
+    console.warn(logPrefix+'Ignoring key option since format is set to array.');
+  } else if(!key && format === 'object') {
+    key = 'fullname';
+  }
 
   compiler.plugin('emit', function(compilation, cb) {
-    var assets;
+    var assets = format === 'object' ? {} : [];
 
-    if(mode === 'object') {
-      assets = {};
+    for(var fullname in compilation.assets) {
+      var splitFullname = fullname.split('.');
 
-      for(var fullAssetName in compilation.assets) {
-        var fullSplitAssetName = fullAssetName.split('.');
+      var val = {
+        fullname: fullname,
+        name: splitFullname[0]
+      };
 
-        var val = {
-          fullname: fullAssetName,
-          name: fullSplitAssetName[0]
-        };
-
-        if(fullSplitAssetName.length > 1) {
-          val.type = fullSplitAssetName[fullSplitAssetName.length-1];
-        }
-
-        if(fullSplitAssetName.length > 2) {
-          val.hash = fullSplitAssetName[fullSplitAssetName.length-2];
-        }
-
-        if(!val[key]) throw new Error('Specified key does not exist!');
-        assets[val[key]] = val;
+      if(splitFullname.length > 1) {
+        val.type = splitFullname[splitFullname.length-1];
       }
-    } else {
-      assets = [];
-      for(var fullAssetName in compilation.assets) {
-        assets.push(fullAssetName);
+
+      if(splitFullname.length > 2) {
+        val.hash = splitFullname[splitFullname.length-2];
+      }
+
+      if(format === 'object') {
+        if(!val[key]) throw new Error(logPrefix+'Specified key does not exist!');
+
+        if(assets[val[key]]) {
+          if(Array.isArray(assets[val[key]])) {
+            assets[val[key]].push(val);
+          } else {
+            assets[val[key]] = [assets[val[key]], val];
+          }
+        } else {
+          assets[val[key]] = val;
+        }
+      } else {
+        assets.push(val);
       }
     }
 
