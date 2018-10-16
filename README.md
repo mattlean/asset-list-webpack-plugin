@@ -81,3 +81,6 @@ This will generate a JSON file that contains the following:
 | **name** | `{String}` | `'assets'` | Name of generated JSON file |
 | **format** | `{'array'\|'object'}` | `'object'` | Format of generated JSON file |
 | **key** | `{'fullname'\|'name'\|'type'\|'hash'}` | `'fullname'` | Set keys for JSON file when running in object format |
+
+## License
+This open source project is licensed under the [MIT License](https://choosealicense.com/licenses/mit).
