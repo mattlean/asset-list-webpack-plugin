@@ -1,27 +1,27 @@
 const { RawSource } = require('webpack-sources');
 
 function AssetListPlugin(options) {
-  this.options = options || { name: 'assets', mode: 'array' };
+  this.options = options || { name: 'assets', format: 'array' };
 }
 
 AssetListPlugin.prototype.apply = function(compiler) {
   var logPrefix = 'asset-list-webpack-plugin: ';
   var outputName = this.options.name || 'assets';
 
-  var mode = this.options.mode || 'array';
-  if(mode !== 'array' && mode !== 'object') {
-    throw new Error(logPrefix+'Plugin only supports "array" or "object" modes.');
+  var format = this.options.format || 'array';
+  if(format !== 'array' && format !== 'object') {
+    throw new Error(logPrefix+'Plugin only supports "array" or "object" formats.');
   }
 
   var key = this.options.key;
-  if(key && mode === 'array') {
-    console.warn(logPrefix+'Ignoring key option since mode is set to array.');
-  } else if(!key && mode === 'object') {
+  if(key && format === 'array') {
+    console.warn(logPrefix+'Ignoring key option since format is set to array.');
+  } else if(!key && format === 'object') {
     key = 'fullname';
   }
 
   compiler.plugin('emit', function(compilation, cb) {
-    var assets = mode === 'object' ? {} : [];
+    var assets = format === 'object' ? {} : [];
 
     for(var fullname in compilation.assets) {
       var splitFullname = fullname.split('.');
@@ -39,7 +39,7 @@ AssetListPlugin.prototype.apply = function(compiler) {
         val.hash = splitFullname[splitFullname.length-2];
       }
 
-      if(mode === 'object') {
+      if(format === 'object') {
         if(!val[key]) throw new Error(logPrefix+'Specified key does not exist!');
 
         if(assets[val[key]]) {

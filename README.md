@@ -1,3 +1,5 @@
+![npm](https://img.shields.io/npm/v/asset-list-webpack-plugin.svg)
+
 # Asset List Webpack Plugin
 This is a [webpack](https://webpack.js.org) plugin that outputs a simple list of generated assets with your webpack bundle.
 
@@ -53,7 +55,7 @@ module.exports = {
   },
   plugins:  [new AssetListWebpackPlugin({
     name: 'file-list',
-    mode: 'object',
+    format: 'object',
     key: 'name'
   })]
 };
@@ -77,5 +79,5 @@ This will generate a JSON file that contains the following:
 | Name | Type | Default | Description |
 |---|---|---|---|
 | **name** | `{String}` | `'assets'` | Name of generated JSON file |
-| **mode** | `{'array'\|'object'}` | `'object'` | Format of generated JSON file |
-| **key** | `{'fullname'\|'name'\|'type'\|'hash'}` | `'fullname'` | Set keys for JSON file when running in object mode |
+| **format** | `{'array'\|'object'}` | `'object'` | Format of generated JSON file |
+| **key** | `{'fullname'\|'name'\|'type'\|'hash'}` | `'fullname'` | Set keys for JSON file when running in object format |
