@@ -13,10 +13,12 @@ AssetListPlugin.prototype.apply = function(compiler) {
     throw new Error(logPrefix+'Plugin only supports "array" or "object" modes.');
   }
 
-  if(this.options.key && mode === 'array') {
+  var key = this.options.key;
+  if(key && mode === 'array') {
     console.warn(logPrefix+'Ignoring key option since mode is set to array.');
+  } else if(!key && mode === 'object') {
+    key = 'fullname';
   }
-  var key = this.options.key || 'fullname';
 
   compiler.plugin('emit', function(compilation, cb) {
     var assets = mode === 'object' ? {} : [];
