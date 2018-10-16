@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/asset-list-webpack-plugin.svg)
+[![npm](https://img.shields.io/npm/v/asset-list-webpack-plugin.svg?colorB=brightgreen)](https://www.npmjs.com/package/asset-list-webpack-plugin)
 
 # Asset List Webpack Plugin
 This is a [webpack](https://webpack.js.org) plugin that outputs a simple list of generated assets with your webpack bundle.
