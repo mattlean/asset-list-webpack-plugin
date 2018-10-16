@@ -14,7 +14,7 @@ module.exports = {
 
   output: {
     path: PATHS.build,
-    filename: '[name].js',
+    filename: '[name].[chunkhash].js',
   },
 
   optimization: {
@@ -29,5 +29,5 @@ module.exports = {
     },
   },
 
-  plugins: [new AssetListWebpackPlugin({mode: 'object', key: 'name'})],
+  plugins: [new AssetListWebpackPlugin({ mode: 'object', key: 'name' })],
 };
