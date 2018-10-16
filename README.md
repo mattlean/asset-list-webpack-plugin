@@ -1,0 +1,1 @@
+# Asset List Webpack Plugin

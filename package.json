@@ -1,0 +1,26 @@
+{
+  "name": "asset-list-webpack-plugin",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/asset-list-webpack-plugin.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsaacLean/asset-list-webpack-plugin.git"
+  },
+  "author": "Matthew Lean",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IsaacLean/asset-list-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/IsaacLean/asset-list-webpack-plugin#readme",
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "lodash": "^4.17.11",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-sources": "^1.3.0"
+  }
+}
