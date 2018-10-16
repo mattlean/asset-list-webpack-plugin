@@ -1,7 +1,7 @@
 {
   "name": "asset-list-webpack-plugin",
   "version": "0.0.1",
-  "description": "",
+  "description": "Outputs a simple list of generated assets with your webpack bundle",
   "main": "src/asset-list-webpack-plugin.js",
   "scripts": {
     "build": "webpack"
@@ -16,6 +16,16 @@
     "url": "https://github.com/IsaacLean/asset-list-webpack-plugin/issues"
   },
   "homepage": "https://github.com/IsaacLean/asset-list-webpack-plugin#readme",
+  "keywords": [
+    "webpack",
+    "plugin",
+    "asset",
+    "assets",
+    "file",
+    "files",
+    "list",
+    "asset-list-webpack-plugin"
+  ],
   "devDependencies": {
     "eslint": "^5.7.0",
     "lodash": "^4.17.11",
