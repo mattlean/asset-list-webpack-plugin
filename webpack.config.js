@@ -29,5 +29,5 @@ module.exports = {
     },
   },
 
-  plugins: [new AssetListWebpackPlugin()],
+  plugins: [new AssetListWebpackPlugin()]
 };

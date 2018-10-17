@@ -10,33 +10,40 @@ AssetListPlugin.prototype.apply = function(compiler) {
 
   var format = this.options.format || 'array';
   if(format !== 'array' && format !== 'object') {
-    throw new Error(logPrefix+'Plugin only supports "array" or "object" formats.');
+    throw new Error(logPrefix+'"'+this.options.format+'" format is not supported.');
   }
 
   var key = this.options.key;
   if(key && format === 'array') {
     console.warn(logPrefix+'Ignoring key option since format is set to array.');
   } else if(!key && format === 'object') {
-    key = 'fullname';
+    key = 'filename';
   }
 
   compiler.plugin('emit', function(compilation, cb) {
     var assets = format === 'object' ? {} : [];
 
-    for(var fullname in compilation.assets) {
-      var splitFullname = fullname.split('.');
+    for(var filename in compilation.assets) {
+      var splitFilename = filename.split('.');
 
       var val = {
-        fullname: fullname,
-        name: splitFullname[0]
+        filename: filename,
+        name: splitFilename[0]
       };
 
-      if(splitFullname.length > 1) {
-        val.type = splitFullname[splitFullname.length-1];
+      if(splitFilename.length > 3) {
+        if(splitFilename[splitFilename.length-1] === 'map') {
+          val.type = splitFilename[splitFilename.length-2]+'.'+splitFilename[splitFilename.length-1];
+          val.hash = splitFilename[splitFilename.length-3];
+        }
       }
 
-      if(splitFullname.length > 2) {
-        val.hash = splitFullname[splitFullname.length-2];
+      if(!val.type && splitFilename.length > 1) {
+        val.type = splitFilename[splitFilename.length-1];
+      }
+
+      if(!val.hash && splitFilename.length > 2) {
+        val.hash = splitFilename[splitFilename.length-2];
       }
 
       if(format === 'object') {
