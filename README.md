@@ -33,7 +33,7 @@ This will generate a JSON file in the output path containing the following:
 **assets.json**
 ```json
 [{
-  "fullname": "main.js",
+  "filename": "main.js",
   "name": "main",
   "type": "js"
 }]
@@ -68,7 +68,7 @@ This will generate a JSON file that contains the following:
 ```json
 {
   "main": {
-    "fullname": "main.js",
+    "filename": "main.js",
     "name": "main",
     "type": "js"
   }
@@ -80,7 +80,7 @@ This will generate a JSON file that contains the following:
 |---|---|---|---|
 | **name** | `{String}` | `'assets'` | Name of generated JSON file |
 | **format** | `{'array'\|'object'}` | `'array'` | Format of generated JSON file |
-| **key** | `{'fullname'\|'name'\|'type'\|'hash'}` | `'fullname'` | Set keys for object formatted JSON file |
+| **key** | `{'filename'\|'name'\|'type'\|'hash'}` | `'filename'` | Set keys for object formatted JSON file |
 
 ## License
 This open source project is licensed under the [MIT License](https://choosealicense.com/licenses/mit).
