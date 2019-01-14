@@ -1,6 +1,7 @@
 const path = require('path');
 
 const AssetListWebpackPlugin = require('./src/asset-list-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const PATHS = {
   entry: path.join(__dirname, 'test', 'index.js'),
@@ -29,5 +30,10 @@ module.exports = {
     },
   },
 
-  plugins: [new AssetListWebpackPlugin()]
+  plugins: [
+    new CleanWebpackPlugin('build/'),
+    new AssetListWebpackPlugin()
+  ],
+
+  devtool: 'source-map'
 };
