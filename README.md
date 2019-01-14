@@ -39,7 +39,7 @@ This will generate a JSON file in the output path containing the following:
 }]
 ```
 
-Additionally, you pass a hash of options to change the format of the JSON file like so:
+Additionally, you pass an object of options to change the format of the JSON file like so:
 
 **webpack.config.js**
 ```javascript
@@ -80,7 +80,7 @@ This will generate a JSON file that contains the following:
 |---|---|---|---|
 | **name** | `{String}` | `'assets'` | Name of generated JSON file |
 | **format** | `{'array'\|'object'}` | `'array'` | Format of generated JSON file |
-| **key** | `{'filename'\|'name'\|'type'\|'hash'}` | `'filename'` | Set keys for object formatted JSON file |
+| **key** | `{'filename'\|'name'\|'type'\|'fingerprint'}` | `'filename'` | Set keys for object formatted JSON file |
 
 ## License
 This open source project is licensed under the [MIT License](https://choosealicense.com/licenses/mit).

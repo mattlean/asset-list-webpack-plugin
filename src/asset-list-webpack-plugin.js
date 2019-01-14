@@ -20,7 +20,7 @@ AssetListPlugin.prototype.apply = function(compiler) {
     key = 'filename';
   }
 
-  compiler.plugin('emit', function(compilation, cb) {
+  compiler.hooks.emit.tapAsync('Asset List Plugin', function(compilation, cb) {
     var assets = format === 'object' ? {} : [];
 
     for(var filename in compilation.assets) {
@@ -34,7 +34,7 @@ AssetListPlugin.prototype.apply = function(compiler) {
       if(splitFilename.length > 3) {
         if(splitFilename[splitFilename.length-1] === 'map') {
           val.type = splitFilename[splitFilename.length-2]+'.'+splitFilename[splitFilename.length-1];
-          val.hash = splitFilename[splitFilename.length-3];
+          val.fingerprint = splitFilename[splitFilename.length-3];
         }
       }
 
@@ -42,8 +42,8 @@ AssetListPlugin.prototype.apply = function(compiler) {
         val.type = splitFilename[splitFilename.length-1];
       }
 
-      if(!val.hash && splitFilename.length > 2) {
-        val.hash = splitFilename[splitFilename.length-2];
+      if(!val.fingerprint && splitFilename.length > 2) {
+        val.fingerprint = splitFilename[splitFilename.length-2];
       }
 
       if(format === 'object') {
