@@ -31,14 +31,11 @@ AssetListPlugin.prototype.apply = function(compiler) {
         name: splitFilename[0]
       };
 
-      if(splitFilename.length > 3) {
-        if(splitFilename[splitFilename.length-1] === 'map') {
-          val.type = splitFilename[splitFilename.length-2]+'.'+splitFilename[splitFilename.length-1];
-          val.fingerprint = splitFilename[splitFilename.length-3];
-        }
+      if(splitFilename.length > 2 && splitFilename[splitFilename.length-1] === 'map') {
+        splitFilename[splitFilename.length - 2] = splitFilename[splitFilename.length - 2]+'.'+splitFilename.pop();
       }
 
-      if(!val.type && splitFilename.length > 1) {
+      if(splitFilename.length > 1) {
         val.type = splitFilename[splitFilename.length-1];
       }
 
@@ -47,7 +44,7 @@ AssetListPlugin.prototype.apply = function(compiler) {
       }
 
       if(format === 'object') {
-        if(!val[key]) throw new Error(logPrefix+'Specified key does not exist!');
+        if(!val[key]) throw new Error(logPrefix+'Specified key does not exist on an asset!');
 
         if(assets[val[key]]) {
           if(Array.isArray(assets[val[key]])) {
