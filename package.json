@@ -1,6 +1,6 @@
 {
   "name": "asset-list-webpack-plugin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Outputs a simple list of generated assets with your webpack bundle",
   "main": "src/asset-list-webpack-plugin.js",
   "scripts": {
